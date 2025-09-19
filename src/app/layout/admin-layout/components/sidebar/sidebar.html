@@ -1,0 +1,20 @@
+<div class="sidebar" [class.collapsed]="!expanded">
+  <button class="toggle-btn" (click)="toggle()">
+    <mat-icon>{{ expanded ? 'menu_open' : 'menu' }}</mat-icon>
+  </button>
+
+  <nav>
+    <a routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" matTooltip="Inicio">
+      <mat-icon>home</mat-icon>
+      <span *ngIf="expanded">Inicio</span>
+    </a>
+    <a routerLink="products" routerLinkActive="active" matTooltip="Productos">
+      <mat-icon>inventory_2</mat-icon>
+      <span *ngIf="expanded">Productos</span>
+    </a>
+    <a routerLink="about" routerLinkActive="active" matTooltip="Nosotros">
+      <mat-icon>people</mat-icon> <!-- Cambiado de info a people -->
+      <span *ngIf="expanded">Nosotros</span>
+    </a>
+  </nav>
+</div>

@@ -1,0 +1,136 @@
+.nosotros {
+  padding: 0px 20px 20px 20px;
+  background: #f8f9fa;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+
+    h2 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-bottom: 40px;
+
+      .card {
+        flex: 1 1 280px;
+        background: #fff;
+        padding: 35px 20px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+          .icon-wrapper {
+            background-color: #16a085;
+
+            mat-icon {
+              color: #fff !important;
+            }
+          }
+
+          h3 {
+            color: #16a085;
+          }
+        }
+
+        .icon-wrapper {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: rgba(26, 188, 156, 0.15);
+          transition: all 0.3s;
+
+          mat-icon {
+            font-size: 40px !important;
+            width: 40px;
+            height: 40px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #16a085; /* icono verde inicial */
+            transition: color 0.3s;
+          }
+        }
+
+        h3 {
+          font-size: 1.4rem;
+          color: #16a085;
+          margin-bottom: 15px;
+          transition: color 0.3s;
+        }
+
+        p {
+          font-size: 1rem;
+          color: #444;
+          line-height: 1.6;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0 0;
+
+          li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #555;
+
+            &:before {
+              content: '✔';
+              color: #16a085;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+
+    .developer {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cards {
+      flex-direction: column;
+      gap: 20px;
+
+      .card {
+        padding: 30px 15px;
+      }
+    }
+  }
+}

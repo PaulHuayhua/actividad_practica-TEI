@@ -1,0 +1,88 @@
+<section class="products">
+  <div class="products-header">
+    <div>
+      <h2>Productos</h2>
+      <span class="subtitle">Explora nuestros productos disponibles</span>
+    </div>
+    <button class="btn-cart" (click)="toggleCartModal()">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>{{ cart.length }}</span>
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <input type="text" placeholder="Buscar producto..." [(ngModel)]="searchTerm" (input)="filterProducts()"/>
+    <select [(ngModel)]="selectedCategory" (change)="filterProducts()">
+      <option value="">Todas las categorías</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <div class="product-image">
+        <img [src]="product.imageUrl" [alt]="product.name" />
+        <span *ngIf="product.discount" class="badge">-{{ product.discount }}%</span>
+      </div>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="category">{{ product.category }}</p>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">
+          <span *ngIf="product.discount" class="old-price">
+            {{ product.price | currency:'PEN':'symbol':'1.2-2' }}
+          </span>
+          <span class="final-price">
+            {{ (product.discount 
+               ? (product.price - (product.price * product.discount / 100))
+               : product.price) | currency:'PEN':'symbol':'1.2-2' }}
+          </span>
+        </p>
+        <button class="btn-add" (click)="addToCart(product)">
+          <mat-icon>add_shopping_cart</mat-icon> Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal carrito (igual que antes) -->
+  <div class="cart-modal" *ngIf="showCart">
+    <div class="cart-content">
+      <h3>Carrito de Compras</h3>
+      <p class="subtitle">Revisa los productos que agregaste</p>
+      <button class="close-modal" (click)="toggleCartModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <div *ngIf="cart.length; else emptyCart">
+        <div class="cart-item" *ngFor="let item of cart">
+          <img [src]="item.imageUrl" [alt]="item.name" />
+          <div class="item-info">
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.category }}</p>
+            <p>{{ (item.discount 
+               ? (item.price - (item.price * item.discount / 100))
+               : item.price) | currency:'PEN':'symbol':'1.2-2' }}</p>
+          </div>
+          <button (click)="removeFromCart(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="cart-total">
+          <span>Total:</span>
+          <span>{{ getTotal() | currency:'PEN':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <button class="btn-confirm" (click)="confirmPurchase()">
+          Confirmar Compra
+        </button>
+      </div>
+
+      <ng-template #emptyCart>
+        <p>Tu carrito está vacío.</p>
+      </ng-template>
+    </div>
+  </div>
+</section>
